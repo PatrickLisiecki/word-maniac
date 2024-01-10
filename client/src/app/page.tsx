@@ -6,8 +6,29 @@ export default function Home() {
   const [wordLength, setWordLength] = useState<string>("");
   const [timeLimit, setTimeLimit] = useState<string>("");
   const [startLetter, setStartLetter] = useState<string>("");
+  const [isRunning, setIsRunning] = useState<boolean>(false);
+  const [seconds, setSeconds] = useState<number>(0);
 
-  const handleSubmit = () => {};
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsRunning(true);
+  };
+
+  useEffect(() => {
+    let timer: any;
+
+    if (isRunning) {
+      timer = setInterval(() => {
+        setSeconds((prevSeconds) => prevSeconds + 1);
+      }, 1000);
+
+      if (seconds === parseInt(timeLimit)) {
+        setIsRunning(false);
+      }
+    }
+
+    return () => clearInterval(timer);
+  }, [isRunning, seconds]);
 
   return (
     <main className="flex min-h-screen flex-col items-center p-24">
@@ -85,6 +106,11 @@ export default function Home() {
           </button>
         </div>
       </form>
+
+      {/* Timer */}
+      <div className="w-full min-h-60px bg-red-200 text-3xl tracking-wide text-center">
+        {seconds} seconds
+      </div>
     </main>
   );
 }
