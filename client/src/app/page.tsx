@@ -2,10 +2,19 @@
 
 import React, { useState, useEffect } from "react";
 
+interface Settings {
+  wordLength: string;
+  timeLimit: string;
+  startLetter: string;
+}
+
 export default function Home() {
-  const [wordLength, setWordLength] = useState<string>("3");
-  const [timeLimit, setTimeLimit] = useState<string>("15");
-  const [startLetter, setStartLetter] = useState<string>("a");
+  const [settings, setSettings] = useState<Settings>({
+    wordLength: "3",
+    timeLimit: "15",
+    startLetter: "A",
+  });
+
   const [isRunning, setIsRunning] = useState<boolean>(false);
   const [seconds, setSeconds] = useState<number>(0);
   const [currentWord, setCurrentWord] = useState<string>("");
@@ -13,12 +22,13 @@ export default function Home() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setSeconds(parseInt(settings.timeLimit));
     setIsRunning(!isRunning);
   };
 
   const handleWordSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (currentWord.length === parseInt(wordLength)) {
+    if (currentWord.length === parseInt(settings.wordLength)) {
       setValidWords([...validWords, currentWord]);
       setCurrentWord("");
     }
@@ -29,10 +39,10 @@ export default function Home() {
 
     if (isRunning) {
       timer = setInterval(() => {
-        setSeconds((prevSeconds) => prevSeconds + 1);
+        setSeconds((prevSeconds) => prevSeconds - 1);
       }, 1000);
 
-      if (seconds === parseInt(timeLimit)) {
+      if (seconds === 0) {
         setIsRunning(false);
       }
     }
@@ -54,16 +64,18 @@ export default function Home() {
             htmlFor="wordLength"
             className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
           >
-            Word Length - {wordLength}
+            Word Length - {settings.wordLength}
           </label>
           <input
             type="range"
             min="1"
             max="20"
             step="1"
-            value={wordLength ? wordLength : 1}
+            value={settings.wordLength ? settings.wordLength : 1}
             id="wordLength"
-            onChange={(e) => setWordLength(e.target.value)}
+            onChange={(e) =>
+              setSettings({ ...settings, wordLength: e.target.value })
+            }
             className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
           ></input>
         </div>
@@ -74,16 +86,18 @@ export default function Home() {
             htmlFor="timeLimit"
             className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
           >
-            Time Limit - {timeLimit}s
+            Time Limit - {settings.timeLimit}s
           </label>
           <input
             type="range"
             min="0"
             max="120"
             step="15"
-            value={timeLimit ? timeLimit : 0}
+            value={settings.timeLimit ? settings.timeLimit : 0}
             id="timeLimit"
-            onChange={(e) => setTimeLimit(e.target.value)}
+            onChange={(e) =>
+              setSettings({ ...settings, timeLimit: e.target.value })
+            }
             className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
           ></input>
         </div>
@@ -94,14 +108,16 @@ export default function Home() {
             htmlFor="startLetter"
             className="block mb-2 text-md font-medium text-gray-900 dark:text-white"
           >
-            Start Letter - {startLetter}
+            Start Letter - {settings.startLetter}
           </label>
           <input
             type="text"
-            value={startLetter}
+            value={settings.startLetter ? settings.startLetter : "A"}
             placeholder="A"
             id="startLetter"
-            onChange={(e) => setStartLetter(e.target.value)}
+            onChange={(e) =>
+              setSettings({ ...settings, startLetter: e.target.value })
+            }
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           ></input>
         </div>
@@ -138,7 +154,7 @@ export default function Home() {
           <input
             type="text"
             value={currentWord}
-            placeholder="A"
+            placeholder="Start typing..."
             id="currentWord"
             onChange={(e) => setCurrentWord(e.target.value)}
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
