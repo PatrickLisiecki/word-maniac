@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Navbar from "@/components/Navbar";
 
 interface Settings {
   wordLength: string;
@@ -51,7 +52,8 @@ export default function Home() {
   }, [isRunning, seconds]);
 
   return (
-    <main className="flex min-h-screen flex-col items-center p-24">
+    <main className="w-full min-h-screen px-24">
+      <Navbar />
       <h1 className="text-2xl font-bold tracking-wide">Word Maniac</h1>
       {/* Settings Menu */}
       <form
