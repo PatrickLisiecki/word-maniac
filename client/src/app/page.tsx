@@ -20,6 +20,7 @@ export default function Home() {
   const [seconds, setSeconds] = useState<number>(0);
   const [currentWord, setCurrentWord] = useState<string>("");
   const [validWords, setValidWords] = useState<any>([]);
+  const [error, setError] = useState<string>("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,11 +28,25 @@ export default function Home() {
     setIsRunning(!isRunning);
   };
 
+  const checkValidWord = (word: string): boolean => {
+    if (
+      currentWord.length === parseInt(settings.wordLength) &&
+      currentWord.charAt(0) === settings.startLetter.toLowerCase() &&
+      isRunning
+    ) {
+      return true;
+    }
+
+    return false;
+  };
+
   const handleWordSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (currentWord.length === parseInt(settings.wordLength)) {
+    if (checkValidWord(currentWord)) {
       setValidWords([...validWords, currentWord]);
       setCurrentWord("");
+    } else {
+      setError("Invalid Word!");
     }
   };
 
@@ -59,7 +74,7 @@ export default function Home() {
         <div className="min-w-[400px] min-h-[600px] my-24 py-12 border-r border-gray-400">
           {/* Timer */}
           <div className="w-full min-h-[60px] grid place-items-center">
-            <span className="scroll-m-20 text-2xl font-semibold tracking-tight">
+            <span className="scroll-m-20 text-2xl font-semibold tracking-tight text-red-500">
               {seconds} seconds
             </span>
           </div>
@@ -151,6 +166,9 @@ export default function Home() {
             className="p-4 flex flex-col items-center"
           >
             {/* Start Letter Input */}
+            <span className="scroll-m-20 text-xl font-semibold tracking-tight text-red-600 block">
+              {error ? error : "🚀"}
+            </span>
             <div className="w-full min-h-[40px] flex flex-col justify-center p-2 relative">
               <input
                 type="text"
