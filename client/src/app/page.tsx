@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from "react";
 import Header from "@/components/Header";
 
+import checkWord from "@/api/checkWord";
+
 interface Settings {
   wordLength: string;
   timeLimit: string;
@@ -28,21 +30,27 @@ export default function Home() {
     setIsRunning(!isRunning);
   };
 
-  const checkValidWord = (word: string): boolean => {
+  const checkValidWord = async (word: string) => {
     if (
       currentWord.length === parseInt(settings.wordLength) &&
-      currentWord.charAt(0) === settings.startLetter.toLowerCase() &&
+      currentWord.toLowerCase().charAt(0) === settings.startLetter.toLowerCase() &&
       isRunning
     ) {
-      return true;
+      const data = await checkWord(word);
+      console.log(data);
+      if (data) {
+        return true;
+      }
+
+      return false;
     }
 
     return false;
   };
 
-  const handleWordSubmit = (e: React.FormEvent) => {
+  const handleWordSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (checkValidWord(currentWord)) {
+    if (await checkValidWord(currentWord)) {
       setValidWords([...validWords, currentWord]);
       setCurrentWord("");
     } else {
