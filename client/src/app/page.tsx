@@ -5,6 +5,8 @@ import React, { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import SettingsForm from "@/components/SettingsForm";
 import Timer from "@/components/Timer";
+import GameInput from "@/components/GameInput";
+import WordList from "@/components/WordList";
 
 import Settings from "@/types/Settings";
 
@@ -54,7 +56,9 @@ export default function Home() {
     return false;
   };
 
-  const handleWordSubmit = async (e: React.FormEvent) => {
+  const handleWordSubmit: React.FormEventHandler<HTMLFormElement> = async (
+    e: React.FormEvent,
+  ) => {
     e.preventDefault();
     if (await checkValidWord(currentWord)) {
       setValidWords([...validWords, currentWord]);
@@ -96,52 +100,23 @@ export default function Home() {
             isRunning={isRunning}
             setIsRunning={setIsRunning}
             setValidWords={setValidWords}
+            setSeconds={setSeconds}
           />
         </div>
 
         <div className="min-w-[800px] flex flex-col my-24 py-12">
-          {/* Word Input */}
-          <form
-            onSubmit={handleWordSubmit}
-            className="p-4 flex flex-col items-center"
-          >
-            {/* Start Letter Input */}
-            <span className="scroll-m-20 text-xl font-semibold tracking-tight text-red-600 block">
-              {error ? error : "🚀"}
-            </span>
-            <div className="w-full min-h-[40px] flex flex-col justify-center p-2 relative">
-              <input
-                type="text"
-                value={currentWord}
-                placeholder="Start typing..."
-                id="currentWord"
-                onChange={(e) => setCurrentWord(e.target.value)}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              ></input>
-              <button
-                type="submit"
-                className="absolute right-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg hover:ring-blue-500 hover:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:hover:ring-blue-500 dark:hover:border-blue-500"
-              >
-                Submit
-              </button>
-            </div>
-          </form>
+          {/* Game Input */}
+          <span className="scroll-m-20 text-xl font-semibold tracking-tight text-red-600 block">
+            {error ? error : "🚀"}
+          </span>
 
-          <div className="min-h-[50px] p-4 flex flex-col items-center">
-            <div className="w-full border-b border-gray-400 text-center">
-              <span className="scroll-m-20 text-2xl font-semibold tracking-tight">
-                Word Bank
-              </span>
-            </div>
-            {validWords.length > 0 &&
-              validWords.map((word: any, index: number) => {
-                return (
-                  <span key={index} className="text-md text-black">
-                    {word}
-                  </span>
-                );
-              })}
-          </div>
+          <GameInput
+            currentWord={currentWord}
+            setCurrentWord={setCurrentWord}
+            handleWordSubmit={handleWordSubmit}
+          />
+
+          <WordList validWords={validWords} />
         </div>
       </section>
     </main>
