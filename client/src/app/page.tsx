@@ -21,20 +21,34 @@ export default function Home() {
   const [isRunning, setIsRunning] = useState<boolean>(false);
   const [seconds, setSeconds] = useState<number>(0);
   const [currentWord, setCurrentWord] = useState<string>("");
-  const [validWords, setValidWords] = useState<any>([]);
+  const [validWords, setValidWords] = useState<Array<string>>([]);
   const [error, setError] = useState<string>("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSeconds(parseInt(settings.timeLimit));
     setIsRunning(!isRunning);
+    setValidWords([]);
+  };
+
+  const isUnique = (word: string): boolean => {
+    for (const curr of validWords) {
+      if (curr.toLowerCase() === word.toLowerCase()) {
+        return false;
+      }
+    }
+
+    console.log("UNIQUE");
+
+    return true;
   };
 
   const checkValidWord = async (word: string) => {
     if (
-      currentWord.length === parseInt(settings.wordLength) &&
-      currentWord.toLowerCase().charAt(0) === settings.startLetter.toLowerCase() &&
-      isRunning
+      word.length === parseInt(settings.wordLength) &&
+      word.toLowerCase().charAt(0) === settings.startLetter.toLowerCase() &&
+      isRunning &&
+      isUnique(word) === true
     ) {
       const data = await checkWord(word);
       console.log(data);
