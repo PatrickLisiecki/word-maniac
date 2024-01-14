@@ -8,6 +8,7 @@ interface SettingsFormProps {
   isRunning: boolean;
   setIsRunning: React.Dispatch<React.SetStateAction<boolean>>;
   setValidWords: React.Dispatch<React.SetStateAction<string[]>>;
+  setSeconds: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export default function SettingsForm({
@@ -16,10 +17,11 @@ export default function SettingsForm({
   isRunning,
   setIsRunning,
   setValidWords,
+  setSeconds,
 }: SettingsFormProps) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // setSeconds(parseInt(settings.timeLimit));
+    setSeconds(parseInt(settings.timeLimit));
     setIsRunning(!isRunning);
     setValidWords([]);
   };
