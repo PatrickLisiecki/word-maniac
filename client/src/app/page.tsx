@@ -37,15 +37,20 @@ export default function Home() {
     return true;
   };
 
-  const checkValidWord = async (word: string) => {
+  const checkValidWord = async (word: string): Promise<boolean> => {
+    // Check if minimum criteria is met to consider the word
     if (
       word.length === parseInt(settings.wordLength) &&
       word.toLowerCase().charAt(0) === settings.startLetter.toLowerCase() &&
-      isRunning &&
-      isUnique(word) === true
+      isUnique(word) &&
+      isRunning
     ) {
+      // Check if word exists
       const data = await checkWord(word);
-      console.log(data);
+
+      // JSON data
+      // console.log(data);
+
       if (data) {
         return true;
       }
@@ -60,6 +65,8 @@ export default function Home() {
     e: React.FormEvent,
   ) => {
     e.preventDefault();
+
+    // Check if word is valid before adding to word list
     if (await checkValidWord(currentWord)) {
       setValidWords([...validWords, currentWord]);
       setCurrentWord("");
@@ -71,11 +78,13 @@ export default function Home() {
   useEffect(() => {
     let timer: any;
 
+    // Decrement seconds
     if (isRunning) {
       timer = setInterval(() => {
         setSeconds((prevSeconds) => prevSeconds - 1);
       }, 1000);
 
+      // Stop game at 0
       if (seconds === 0) {
         setIsRunning(false);
       }
@@ -85,11 +94,11 @@ export default function Home() {
   }, [isRunning, seconds]);
 
   return (
-    <main className="w-full max-h-screen flex flex-col">
+    <main className="w-full h-screen max-h-screen flex flex-col">
       <Header />
-      <section className="h-full mx-auto flex flex-row">
+      <section className="border border-gray-400 mx-auto my-auto flex flex-row rounded-lg bg-gray-200 dark:bg-gray-700">
         {/* Menu */}
-        <div className="min-w-[400px] min-h-[600px] my-24 py-12 border-r border-gray-400">
+        <div className="min-w-[400px] min-h-[600px] py-12 border-r border-gray-400">
           {/* Timer */}
           <Timer time={seconds} />
 
@@ -104,11 +113,11 @@ export default function Home() {
           />
         </div>
 
-        <div className="min-w-[800px] flex flex-col my-24 py-12">
+        <div className="min-w-[800px] flex flex-col py-12">
           {/* Game Input */}
-          <span className="scroll-m-20 text-xl font-semibold tracking-tight text-red-600 block">
-            {error ? error : "🚀"}
-          </span>
+          <div className="w-full text-center text-xl font-semibold tracking-tight text-red-500 block">
+            {error ? error : ""}
+          </div>
 
           <GameInput
             currentWord={currentWord}

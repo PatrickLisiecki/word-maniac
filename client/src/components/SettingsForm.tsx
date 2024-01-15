@@ -49,7 +49,7 @@ export default function SettingsForm({
           onChange={(e) =>
             setSettings({ ...settings, wordLength: e.target.value })
           }
-          className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
+          className="w-full h-3 bg-gray-400 rounded-lg appearance-none cursor-pointer dark:bg-gray-900"
         ></input>
       </div>
 
@@ -71,7 +71,7 @@ export default function SettingsForm({
           onChange={(e) =>
             setSettings({ ...settings, timeLimit: e.target.value })
           }
-          className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
+          className="w-full h-3 bg-gray-400 rounded-lg appearance-none cursor-pointer dark:bg-gray-900"
         ></input>
       </div>
 
@@ -91,7 +91,7 @@ export default function SettingsForm({
           onChange={(e) =>
             setSettings({ ...settings, startLetter: e.target.value })
           }
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-0"
         ></input>
       </div>
 

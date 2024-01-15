@@ -6,20 +6,20 @@ interface WordListProps {
 
 export default function WordList({ validWords }: WordListProps) {
   return (
-    <div className="min-h-[50px] p-4 flex flex-col items-center">
-      <div className="w-full border-b border-gray-400 text-center">
-        <span className="scroll-m-20 text-2xl font-semibold tracking-tight">
-          Word Bank
-        </span>
+    <div className="w-full border-t border-gray-400 flex flex-col items-center">
+      <div className="w-full text-center my-2">
+        <span className="text-2xl font-semibold tracking-tight">Word Bank</span>
       </div>
-      {validWords.length > 0 &&
-        validWords.map((word: any, index: number) => {
-          return (
-            <span key={index} className="text-md text-black">
-              {word}
-            </span>
-          );
-        })}
+      <div className="w-full px-12 grid grid-cols-3 gap-2 place-items-center overflow-auto">
+        {validWords.length > 0 &&
+          validWords.map((word: any, index: number) => {
+            return (
+              <span key={index} className="text-xl text-black dark:text-white">
+                {word}
+              </span>
+            );
+          })}
+      </div>
     </div>
   );
 }

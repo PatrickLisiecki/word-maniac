@@ -14,7 +14,7 @@ export default function GameInput({
   return (
     <form
       onSubmit={handleWordSubmit}
-      className="p-4 flex flex-col items-center"
+      className="px-4 flex flex-col items-center"
     >
       {/* Word Input */}
       <div className="w-full min-h-[40px] flex flex-col justify-center p-2 relative">
