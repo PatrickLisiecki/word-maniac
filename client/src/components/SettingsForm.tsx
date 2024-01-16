@@ -27,18 +27,16 @@ export default function SettingsForm({
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="w-full p-4 flex flex-col items-center"
-    >
+    <form onSubmit={handleSubmit} className="w-full flex flex-col items-center">
       {/* Word Length Slider */}
       <div className="w-full min-h-[40px] flex flex-col p-2">
         <label
           htmlFor="wordLength"
-          className="block mb-2 scroll-m-20 text-xl font-semibold tracking-tight text-gray-900 dark:text-white"
+          className="block mb-2 text-xl font-semibold tracking-tight text-white dark:text-white"
         >
           Word Length - {settings.wordLength}
         </label>
+
         <input
           type="range"
           min="1"
@@ -49,7 +47,7 @@ export default function SettingsForm({
           onChange={(e) =>
             setSettings({ ...settings, wordLength: e.target.value })
           }
-          className="w-full h-3 bg-gray-400 rounded-lg appearance-none cursor-pointer dark:bg-gray-900"
+          className="w-full h-3 bg-gray-400 rounded-lg appearance-none cursor-pointer dark:bg-white accent-[#343434]"
         ></input>
       </div>
 
@@ -57,7 +55,7 @@ export default function SettingsForm({
       <div className="w-full min-h-[40px] flex flex-col p-2">
         <label
           htmlFor="timeLimit"
-          className="block mb-2 scroll-m-20 text-xl font-semibold tracking-tight text-gray-900 dark:text-white"
+          className="block mb-2 text-xl font-semibold tracking-tight text-white dark:text-white"
         >
           Time Limit - {settings.timeLimit}s
         </label>
@@ -71,7 +69,7 @@ export default function SettingsForm({
           onChange={(e) =>
             setSettings({ ...settings, timeLimit: e.target.value })
           }
-          className="w-full h-3 bg-gray-400 rounded-lg appearance-none cursor-pointer dark:bg-gray-900"
+          className="w-full h-3 bg-gray-400 rounded-lg appearance-none cursor-pointer dark:bg-white accent-[#343434]"
         ></input>
       </div>
 
@@ -79,7 +77,7 @@ export default function SettingsForm({
       <div className="w-full min-h-[40px] flex flex-col p-2">
         <label
           htmlFor="startLetter"
-          className="block mb-2 scroll-m-20 text-xl font-semibold tracking-tight text-gray-900 dark:text-white"
+          className="block mb-2 text-xl font-semibold tracking-tight text-gray-900 dark:text-white"
         >
           Start Letter - {settings.startLetter}
         </label>
@@ -91,7 +89,7 @@ export default function SettingsForm({
           onChange={(e) =>
             setSettings({ ...settings, startLetter: e.target.value })
           }
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-0"
+          className="block w-full cursor-text rounded border border-gray-500 bg-[#1E1E1E] p-2.5 text-white placeholder:text-[#747778] focus:outline-none"
         ></input>
       </div>
 
@@ -99,7 +97,9 @@ export default function SettingsForm({
       <div className="w-full min-h-[40px] flex flex-col justify-center p-2">
         <button
           type="submit"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg hover:ring-blue-500 hover:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:hover:ring-blue-500 dark:hover:border-blue-500"
+          className={`${
+            isRunning ? "hover:border-red-400" : "hover:border-green-400"
+          } block w-full p-2.5 rounded border border-gray-500 bg-[#1E1E1E]`}
         >
           {isRunning ? "Stop Game" : "Begin Game"}
         </button>

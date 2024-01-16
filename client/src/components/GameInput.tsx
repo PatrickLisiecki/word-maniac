@@ -24,11 +24,11 @@ export default function GameInput({
           placeholder="Start typing..."
           id="currentWord"
           onChange={(e) => setCurrentWord(e.target.value)}
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="bblock w-full cursor-text rounded border border-gray-500 bg-[#1E1E1E] p-4 text-white placeholder:text-[#747778] focus:outline-none"
         ></input>
         <button
           type="submit"
-          className="absolute right-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg hover:ring-blue-500 hover:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:hover:ring-blue-500 dark:hover:border-blue-500"
+          className="absolute right-4 p-2.5 text-sm rounded-lg border border-gray-500 bg-[#1E1E1E] hover:border-green-400"
         >
           Submit
         </button>
