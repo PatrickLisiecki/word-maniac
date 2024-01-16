@@ -2,11 +2,11 @@
 
 import React, { useState, useEffect } from "react";
 
-import Header from "@/components/Header";
 import SettingsForm from "@/components/SettingsForm";
 import Timer from "@/components/Timer";
 import GameInput from "@/components/GameInput";
 import WordList from "@/components/WordList";
+import ModeToggle from "@/components/ModeToggle";
 
 import Settings from "@/types/Settings";
 
@@ -94,11 +94,14 @@ export default function Home() {
   }, [isRunning, seconds]);
 
   return (
-    <main className="w-full h-screen max-h-screen flex flex-col">
-      <Header />
-      <section className="border border-gray-400 mx-auto my-auto flex flex-row rounded-lg bg-gray-200 dark:bg-gray-700">
-        {/* Menu */}
-        <div className="min-w-[400px] min-h-[600px] py-12 border-r border-gray-400">
+    <main className="w-full h-screen max-h-screen flex justify-center items-center">
+      <div className="border border-gray-500 flex flex-row rounded-2xl bg-white dark:bg-[#1e1e1e] overflow-hidden">
+        {/* Sidebar Menu */}
+        <aside className="min-w-[400px] min-h-[600px] flex flex-col justify-between p-6 border-r border-gray-400 bg-[#2F4F4F]">
+          <div className="text-3xl font-semibold tracking-tight text-center">
+            Word Maniac
+          </div>
+
           {/* Timer */}
           <Timer time={seconds} />
 
@@ -111,7 +114,9 @@ export default function Home() {
             setValidWords={setValidWords}
             setSeconds={setSeconds}
           />
-        </div>
+
+          <ModeToggle />
+        </aside>
 
         <div className="min-w-[800px] flex flex-col py-12">
           {/* Game Input */}
@@ -127,7 +132,7 @@ export default function Home() {
 
           <WordList validWords={validWords} />
         </div>
-      </section>
+      </div>
     </main>
   );
 }
