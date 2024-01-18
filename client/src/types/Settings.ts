@@ -2,7 +2,7 @@
 type Settings = {
   wordLength: string;
   timeLimit: string;
-  startLetter: string;
+  start: string;
 }
 
 export default Settings;

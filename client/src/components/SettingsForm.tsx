@@ -76,19 +76,17 @@ export default function SettingsForm({
       {/* Start Letter Input */}
       <div className="w-full min-h-[40px] flex flex-col p-2">
         <label
-          htmlFor="startLetter"
+          htmlFor="start"
           className="block mb-2 text-xl font-semibold tracking-tight text-gray-900 dark:text-white"
         >
-          Start Letter - {settings.startLetter}
+          Start String - {settings.start}
         </label>
         <input
           type="text"
-          value={settings.startLetter}
+          value={settings.start}
           placeholder="Starting letter"
-          id="startLetter"
-          onChange={(e) =>
-            setSettings({ ...settings, startLetter: e.target.value })
-          }
+          id="start"
+          onChange={(e) => setSettings({ ...settings, start: e.target.value })}
           className="block w-full cursor-text rounded border border-gray-500 bg-[#1E1E1E] p-2.5 text-white placeholder:text-[#747778] focus:outline-none"
         ></input>
       </div>
