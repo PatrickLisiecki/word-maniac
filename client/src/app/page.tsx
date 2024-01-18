@@ -16,15 +16,16 @@ export default function Home() {
   const [settings, setSettings] = useState<Settings>({
     wordLength: "3",
     timeLimit: "15",
-    startLetter: "A",
+    start: "A",
   });
 
   const [isRunning, setIsRunning] = useState<boolean>(false);
   const [seconds, setSeconds] = useState<number>(0);
   const [currentWord, setCurrentWord] = useState<string>("");
   const [validWords, setValidWords] = useState<Array<string>>([]);
-  const [error, setError] = useState<string>("");
+  const [message, setMessage] = useState<string>("");
 
+  // Checks if current word has already been submitted
   const isUnique = (word: string): boolean => {
     for (const curr of validWords) {
       if (curr.toLowerCase() === word.toLowerCase()) {
@@ -37,11 +38,30 @@ export default function Home() {
     return true;
   };
 
-  const checkValidWord = async (word: string): Promise<boolean> => {
+  // Checks if current word matches the starting string
+  const hasSubstring = (word: string, start: string): boolean => {
+    // How many letters should be checked
+    let startLen = start.length;
+
+    // The beginning of the word up until the start length
+    let wordSubstr = word.substring(0, startLen);
+
+    if (wordSubstr.toLowerCase() === start.toLowerCase()) {
+      return true;
+    }
+
+    return false;
+  };
+
+  const isMinimumLength = (word: string, len: number): boolean => {
+    return word.length === len;
+  };
+
+  const isValid = async (word: string): Promise<boolean> => {
     // Check if minimum criteria is met to consider the word
     if (
-      word.length === parseInt(settings.wordLength) &&
-      word.toLowerCase().charAt(0) === settings.startLetter.toLowerCase() &&
+      isMinimumLength(word, parseInt(settings.wordLength)) &&
+      hasSubstring(word, settings.start) &&
       isUnique(word) &&
       isRunning
     ) {
@@ -67,11 +87,11 @@ export default function Home() {
     e.preventDefault();
 
     // Check if word is valid before adding to word list
-    if (await checkValidWord(currentWord)) {
+    if (await isValid(currentWord)) {
       setValidWords([...validWords, currentWord]);
       setCurrentWord("");
     } else {
-      setError("Invalid Word!");
+      setMessage("Invalid Word!");
     }
   };
 
@@ -87,6 +107,8 @@ export default function Home() {
       // Stop game at 0
       if (seconds === 0) {
         setIsRunning(false);
+
+        setMessage(`You guessed ${validWords.length} words!`);
       }
     }
 
@@ -118,12 +140,8 @@ export default function Home() {
           <ModeToggle />
         </aside>
 
-        <div className="min-w-[800px] flex flex-col py-12">
+        <div className="min-w-[800px] flex flex-col">
           {/* Game Input */}
-          <div className="w-full text-center text-xl font-semibold tracking-tight text-red-500 block">
-            {error ? error : ""}
-          </div>
-
           <GameInput
             currentWord={currentWord}
             setCurrentWord={setCurrentWord}
@@ -131,6 +149,16 @@ export default function Home() {
           />
 
           <WordList validWords={validWords} />
+
+          {message && (
+            <div
+              className={`${
+                isRunning ? "bg-red-500" : "bg-green-500"
+              } w-full text-center text-xl font-semibold tracking-tight text-white bg-red-500 block mt-auto p-2`}
+            >
+              {message}
+            </div>
+          )}
         </div>
       </div>
     </main>
