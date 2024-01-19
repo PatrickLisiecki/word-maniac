@@ -39,7 +39,7 @@ export default function SettingsForm({
 
         <input
           type="range"
-          min="1"
+          min="2"
           max="20"
           step="1"
           value={settings.wordLength ? settings.wordLength : 1}
