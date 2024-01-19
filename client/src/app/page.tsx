@@ -6,24 +6,38 @@ import SettingsForm from "@/components/SettingsForm";
 import Timer from "@/components/Timer";
 import GameInput from "@/components/GameInput";
 import WordList from "@/components/WordList";
-import ModeToggle from "@/components/ModeToggle";
+import Footer from "@/components/Footer";
 
 import Settings from "@/types/Settings";
 
 import checkWord from "@/api/checkWord";
 
 export default function Home() {
+  // Game Settings
   const [settings, setSettings] = useState<Settings>({
+    // Default settings
     wordLength: "3",
     timeLimit: "15",
     start: "A",
   });
 
+  // Is the game in progress?
   const [isRunning, setIsRunning] = useState<boolean>(false);
+
+  // Timer for game
   const [seconds, setSeconds] = useState<number>(0);
+
+  // User Input
   const [currentWord, setCurrentWord] = useState<string>("");
+
+  // Collection of valid user-submitted words
   const [validWords, setValidWords] = useState<Array<string>>([]);
+
+  // Error and final message
   const [message, setMessage] = useState<string>("");
+
+  // Is the game screen expanded?
+  const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
   // Checks if current word has already been submitted
   const isUnique = (word: string): boolean => {
@@ -95,6 +109,7 @@ export default function Home() {
     }
   };
 
+  // Every time the timer is decremented run this effect
   useEffect(() => {
     let timer: any;
 
@@ -117,7 +132,12 @@ export default function Home() {
 
   return (
     <main className="w-full h-screen max-h-screen flex justify-center items-center">
-      <div className="border border-gray-500 flex flex-row rounded-2xl bg-white dark:bg-[#1e1e1e] overflow-hidden">
+      {/* Game Screen */}
+      <div
+        className={`${
+          isExpanded ? "w-full h-full" : "rounded-2xl"
+        } border border-gray-500 flex flex-row bg-white dark:bg-[#1e1e1e] overflow-hidden`}
+      >
         {/* Sidebar Menu */}
         <aside className="min-w-[400px] min-h-[600px] flex flex-col justify-between p-6 border-r border-gray-400 bg-[#2F4F4F]">
           <div className="text-3xl font-semibold tracking-tight text-center">
@@ -137,7 +157,8 @@ export default function Home() {
             setSeconds={setSeconds}
           />
 
-          <ModeToggle />
+          {/* Sidebar Footer */}
+          <Footer isExpanded={isExpanded} setIsExpanded={setIsExpanded} />
         </aside>
 
         <div className="min-w-[800px] flex flex-col">
