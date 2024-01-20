@@ -6,7 +6,7 @@ interface TimerProps {
 
 export default function Timer({ time }: TimerProps) {
   return (
-    <div className="w-full min-h-[60px] grid place-items-center">
+    <div className="grid min-h-[60px] w-full place-items-center">
       <span className="text-3xl font-semibold tracking-tight text-red-500">
         {time} seconds
       </span>

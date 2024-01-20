@@ -131,16 +131,16 @@ export default function Home() {
   }, [isRunning, seconds]);
 
   return (
-    <main className="w-full h-screen max-h-screen flex justify-center items-center">
+    <main className="flex h-screen max-h-screen w-full items-center justify-center">
       {/* Game Screen */}
       <div
         className={`${
-          isExpanded ? "w-full h-full" : "rounded-2xl border border-gray-500"
-        } flex flex-row bg-white dark:bg-[#1e1e1e] overflow-hidden`}
+          isExpanded ? "h-full w-full" : "rounded-2xl border border-gray-500"
+        } flex flex-row overflow-hidden bg-white dark:bg-dark`}
       >
         {/* Sidebar Menu */}
-        <aside className="min-w-[400px] min-h-[600px] flex flex-col justify-between p-6 border-r border-gray-400 bg-[#2F4F4F]">
-          <div className="text-3xl font-semibold tracking-tight text-center">
+        <aside className="flex min-h-[600px] min-w-[400px] flex-col justify-between border-r border-gray-400 bg-gray-300 p-6 dark:bg-sidebar">
+          <div className="text-center text-3xl font-semibold tracking-tight text-light">
             Word Maniac
           </div>
 
@@ -161,7 +161,7 @@ export default function Home() {
           <Footer isExpanded={isExpanded} setIsExpanded={setIsExpanded} />
         </aside>
 
-        <div className="w-full min-w-[800px] flex flex-col">
+        <div className="flex w-full min-w-[800px] flex-col">
           {/* Game Input */}
           <GameInput
             currentWord={currentWord}
@@ -175,7 +175,7 @@ export default function Home() {
             <div
               className={`${
                 isRunning ? "bg-red-500" : "bg-green-500"
-              } w-full text-center text-xl font-semibold tracking-tight text-white bg-red-500 block mt-auto p-2`}
+              } mt-auto block w-full p-2 text-center text-xl font-semibold tracking-tight text-white`}
             >
               {message}
             </div>
