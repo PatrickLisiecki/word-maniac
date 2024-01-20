@@ -17,7 +17,7 @@ export default function Home() {
   const [settings, setSettings] = useState<Settings>({
     // Default settings
     wordLength: "3",
-    timeLimit: "15",
+    timeLimit: "60",
     start: "A",
   });
 
@@ -135,8 +135,8 @@ export default function Home() {
       {/* Game Screen */}
       <div
         className={`${
-          isExpanded ? "w-full h-full" : "rounded-2xl"
-        } border border-gray-500 flex flex-row bg-white dark:bg-[#1e1e1e] overflow-hidden`}
+          isExpanded ? "w-full h-full" : "rounded-2xl border border-gray-500"
+        } flex flex-row bg-white dark:bg-[#1e1e1e] overflow-hidden`}
       >
         {/* Sidebar Menu */}
         <aside className="min-w-[400px] min-h-[600px] flex flex-col justify-between p-6 border-r border-gray-400 bg-[#2F4F4F]">
@@ -161,7 +161,7 @@ export default function Home() {
           <Footer isExpanded={isExpanded} setIsExpanded={setIsExpanded} />
         </aside>
 
-        <div className="min-w-[800px] flex flex-col">
+        <div className="w-full min-w-[800px] flex flex-col">
           {/* Game Input */}
           <GameInput
             currentWord={currentWord}

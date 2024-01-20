@@ -42,7 +42,7 @@ export default function SettingsForm({
           min="2"
           max="20"
           step="1"
-          value={settings.wordLength ? settings.wordLength : 1}
+          value={settings.wordLength ? settings.wordLength : 2}
           id="wordLength"
           onChange={(e) =>
             setSettings({ ...settings, wordLength: e.target.value })
@@ -61,10 +61,10 @@ export default function SettingsForm({
         </label>
         <input
           type="range"
-          min="0"
+          min="15"
           max="120"
           step="15"
-          value={settings.timeLimit ? settings.timeLimit : 0}
+          value={settings.timeLimit ? settings.timeLimit : 60}
           id="timeLimit"
           onChange={(e) =>
             setSettings({ ...settings, timeLimit: e.target.value })

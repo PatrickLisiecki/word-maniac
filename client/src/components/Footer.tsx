@@ -33,7 +33,7 @@ export default function Footer({ isExpanded, setIsExpanded }: FooterProps) {
 
       <a
         href="https://github.com/PatrickLisiecki"
-        rel="noopenner norefferer"
+        rel="noopener noreferrer"
         target="_blank"
         className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 dark:ring-offset-neutral-950 dark:focus-visible:ring-neutral-300 border border-neutral-200 bg-white hover:bg-neutral-100 hover:text-neutral-900 dark:border-neutral-800 dark:bg-neutral-950 dark:hover:bg-neutral-800 dark:hover:text-neutral-50 h-10 w-10"
       >
