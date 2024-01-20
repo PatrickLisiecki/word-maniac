@@ -32,9 +32,16 @@ const config = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      colors: {
+        dark: "#1E1E1E",
+        sidebar: "#16453E",
+        light: "#FFFFFF",
+        accent: "#343434",
+        place: "#747778",
+      },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), "prettier-plugin-tailwindcss"],
 } satisfies Config;
 
 export default config;
