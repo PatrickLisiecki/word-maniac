@@ -1,6 +1,6 @@
 // settings.interface.ts
 type Settings = {
-  wordLength: string;
+  wordLength: number;
   timeLimit: string;
   start: string;
 };
