@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
-import SettingsForm from "@/components/SettingsForm";
-import Timer from "@/components/Timer";
-import GameInput from "@/components/GameInput";
-import WordList from "@/components/WordList";
-import Footer from "@/components/Footer";
+import SettingsForm from "./_components/SettingsForm";
+import Timer from "./_components/Timer";
+import GameInput from "./_components/GameInput";
+import WordList from "./_components/WordList";
+import Footer from "./_components/Footer";
 
 import Settings from "@/types/Settings";
 
@@ -140,7 +140,7 @@ export default function Home() {
       >
         {/* Sidebar Menu */}
         <aside className="flex min-h-[600px] min-w-[400px] flex-col justify-between border-r border-gray-400 bg-gray-300 p-6 dark:bg-sidebar">
-          <div className="text-center text-3xl font-semibold tracking-tight text-light">
+          <div className="text-center text-3xl font-semibold tracking-tight text-dark dark:text-white">
             Word Maniac
           </div>
 

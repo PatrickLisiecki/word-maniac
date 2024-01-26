@@ -1,5 +1,3 @@
-import React from "react";
-
 interface GameInputProps {
   currentWord: string;
   setCurrentWord: React.Dispatch<React.SetStateAction<string>>;
@@ -24,11 +22,11 @@ export default function GameInput({
           placeholder="Start typing..."
           id="currentWord"
           onChange={(e) => setCurrentWord(e.target.value)}
-          className="block w-full cursor-text rounded border border-gray-500 bg-[#1E1E1E] p-4 text-white placeholder:text-[#747778] focus:outline-none"
+          className="block w-full cursor-text rounded border border-gray-500 p-4 text-dark placeholder:text-place focus:outline-none dark:bg-dark dark:text-white"
         ></input>
         <button
           type="submit"
-          className="absolute right-4 rounded-lg border border-gray-500 bg-[#1E1E1E] p-2.5 text-sm hover:border-green-400"
+          className="absolute right-4 rounded-lg border border-gray-500 p-2.5 text-sm hover:border-green-400 dark:bg-dark"
         >
           Submit
         </button>

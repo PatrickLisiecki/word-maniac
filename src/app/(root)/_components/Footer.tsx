@@ -1,8 +1,6 @@
-import React from "react";
+import ModeToggle from "@/components/ui/mode-toggle";
 
 import { CornersIcon, GitHubLogoIcon } from "@radix-ui/react-icons";
-
-import ModeToggle from "./ui/ModeToggle";
 
 interface FooterProps {
   isExpanded: boolean;

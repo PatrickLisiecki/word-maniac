@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-
 import Settings from "@/types/Settings";
 
 interface SettingsFormProps {
@@ -99,7 +97,7 @@ export default function SettingsForm({
           type="submit"
           className={`${
             isRunning ? "hover:border-red-400" : "hover:border-green-400"
-          } block w-full rounded border border-gray-500 bg-[#1E1E1E] p-2.5`}
+          } block w-full rounded border border-gray-500 bg-white p-2.5 dark:bg-dark`}
         >
           {isRunning ? "Stop Game" : "Begin Game"}
         </button>
