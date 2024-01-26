@@ -16,7 +16,7 @@ export default function Home() {
   // Game Settings
   const [settings, setSettings] = useState<Settings>({
     // Default settings
-    wordLength: "3",
+    wordLength: 3,
     timeLimit: "60",
     start: "A",
   });
@@ -74,7 +74,7 @@ export default function Home() {
   const isValid = async (word: string): Promise<boolean> => {
     // Check if minimum criteria is met to consider the word
     if (
-      isMinimumLength(word, parseInt(settings.wordLength)) &&
+      isMinimumLength(word, settings.wordLength) &&
       hasSubstring(word, settings.start) &&
       isUnique(word) &&
       isRunning

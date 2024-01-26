@@ -1,3 +1,5 @@
+import { Slider } from "@/components/ui/slider";
+
 import Settings from "@/types/Settings";
 
 interface SettingsFormProps {
@@ -30,7 +32,7 @@ export default function SettingsForm({
       <div className="flex min-h-[40px] w-full flex-col p-2">
         <label
           htmlFor="wordLength"
-          className="mb-2 block text-xl font-semibold tracking-tight text-white"
+          className="mb-2 block text-xl font-semibold tracking-tight text-dark dark:text-white"
         >
           Word Length - {settings.wordLength}
         </label>
@@ -43,9 +45,9 @@ export default function SettingsForm({
           value={settings.wordLength ? settings.wordLength : 2}
           id="wordLength"
           onChange={(e) =>
-            setSettings({ ...settings, wordLength: e.target.value })
+            setSettings({ ...settings, wordLength: parseInt(e.target.value) })
           }
-          className="h-3 w-full cursor-pointer appearance-none rounded-lg bg-white accent-accent"
+          className="h-2 w-full cursor-pointer appearance-none rounded-full bg-neutral-800 accent-neutral-500 dark:bg-neutral-100"
         ></input>
       </div>
 
@@ -53,7 +55,7 @@ export default function SettingsForm({
       <div className="flex min-h-[40px] w-full flex-col p-2">
         <label
           htmlFor="timeLimit"
-          className="mb-2 block text-xl font-semibold tracking-tight text-white"
+          className="mb-2 block text-xl font-semibold tracking-tight text-dark dark:text-white"
         >
           Time Limit - {settings.timeLimit}s
         </label>
@@ -68,15 +70,15 @@ export default function SettingsForm({
           onChange={(e) =>
             setSettings({ ...settings, timeLimit: e.target.value })
           }
-          className="h-3 w-full cursor-pointer appearance-none rounded-lg bg-white accent-accent"
+          className="h-2 w-full cursor-pointer appearance-none rounded-full bg-neutral-800 accent-neutral-500 dark:bg-neutral-100"
         ></input>
       </div>
 
-      {/* Start Letter Input */}
+      {/* Start String Input */}
       <div className="flex min-h-[40px] w-full flex-col p-2">
         <label
           htmlFor="start"
-          className="mb-2 block text-xl font-semibold tracking-tight text-white"
+          className="mb-2 block text-xl font-semibold tracking-tight text-dark dark:text-white"
         >
           Start String - {settings.start}
         </label>
