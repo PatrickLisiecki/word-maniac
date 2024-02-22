@@ -10,7 +10,7 @@ import Footer from "./_components/Footer";
 
 import Settings from "@/types/Settings";
 
-import checkWord from "@/api/checkWord";
+import checkWord from "../../api/checkWord";
 
 export default function Home() {
   // Game Settings
